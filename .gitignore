@@ -1,0 +1,7 @@
+# 打包产物（可由源码重新生成，不纳入版本控制）
+LinguaVerse.zip
+
+# 系统与编辑器临时文件
+.DS_Store
+Thumbs.db
+*.swp
