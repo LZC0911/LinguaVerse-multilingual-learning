@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#6366f1" />
+  <title>LinguaVerse · 沉浸式多语种学习平台</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+  <!-- ============ 启动动画 ============ -->
+  <div id="splash" class="splash">
+    <div class="splash-inner">
+      <div class="splash-logo">
+        <span class="splash-globe">🌍</span>
+        <span class="splash-ring"></span>
+      </div>
+      <div class="splash-title">LinguaVerse</div>
+      <div class="splash-sub">沉浸式多语种学习宇宙</div>
+    </div>
+  </div>
+
+  <!-- ============ 认证页（未登录） ============ -->
+  <div id="auth-view" class="auth-view hidden">
+    <div class="auth-bg">
+      <div class="auth-orb orb-1"></div>
+      <div class="auth-orb orb-2"></div>
+      <div class="auth-orb orb-3"></div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="brand-globe">🌍</span>
+        <span class="brand-name">LinguaVerse</span>
+      </div>
+      <h1 class="auth-headline">打开世界，<br/>从一句新语言开始</h1>
+      <p class="auth-sub">英语 · 日语 · 韩语，分级沉浸式学习，让每一次开口都更自信。</p>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth-tab="login">登录</button>
+        <button class="auth-tab" data-auth-tab="register">注册</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <label class="field">
+          <span class="field-label">用户名</span>
+          <input type="text" name="username" placeholder="输入用户名" required autocomplete="username" />
+        </label>
+        <label class="field">
+          <span class="field-label">密码</span>
+          <input type="password" name="password" placeholder="输入密码" required autocomplete="current-password" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">进入学习宇宙</button>
+        <p class="auth-hint">提示：首次使用请先注册，数据保存在本地浏览器。</p>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <label class="field">
+          <span class="field-label">用户名</span>
+          <input type="text" name="username" placeholder="给自己起个名字" required autocomplete="username" />
+        </label>
+        <label class="field">
+          <span class="field-label">密码</span>
+          <input type="password" name="password" placeholder="设置密码（至少 4 位）" required minlength="4" autocomplete="new-password" />
+        </label>
+        <label class="field">
+          <span class="field-label">学习目标语言</span>
+          <select name="targetLang" class="field-select">
+            <option value="english">🇬🇧 英语</option>
+            <option value="japanese">🇯🇵 日语</option>
+            <option value="korean">🇰🇷 韩语</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field-label">当前水平</span>
+          <select name="level" class="field-select">
+            <option value="A1">A1 · 零基础入门</option>
+            <option value="A2">A2 · 初级</option>
+            <option value="B1">B1 · 中级</option>
+            <option value="B2">B2 · 中高级</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">创建我的学习档案</button>
+      </form>
+
+      <div class="auth-features">
+        <div class="auth-feat"><span>分级课程体系</span></div>
+        <div class="auth-feat"><span>互动学习模块</span></div>
+        <div class="auth-feat"><span>进度智能追踪</span></div>
+        <div class="auth-feat"><span>个性化路径</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 主应用（已登录） ============ -->
+  <div id="app" class="app hidden">
+    <!-- 顶部导航 -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="菜单">☰</button>
+        <div class="brand-mini" data-nav="home">
+          <span class="brand-globe mini">🌍</span>
+          <span class="brand-name mini">LinguaVerse</span>
+        </div>
+      </div>
+      <div class="topbar-center">
+        <div class="streak-pill" id="streak-pill" title="连续学习天数">
+          <span class="streak-flame">🔥</span>
+          <span id="streak-count">0</span>
+        </div>
+        <div class="xp-pill" title="经验值">
+          <span class="xp-star">⭐</span>
+          <span id="xp-count">0</span>
+          <span class="xp-level" id="xp-level">Lv.A1</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="theme-toggle" aria-label="切换主题">🌙</button>
+        <div class="user-chip" id="user-chip">
+          <span class="user-avatar" id="user-avatar">🧑</span>
+          <span class="user-name" id="user-name">用户</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 侧边导航 -->
+    <nav class="sidenav" id="sidenav">
+      <button class="nav-item active" data-nav="home"><span class="nav-ico">🏠</span><span class="nav-txt">学习中心</span></button>
+      <button class="nav-item" data-nav="courses"><span class="nav-ico">📚</span><span class="nav-txt">分级课程</span></button>
+      <button class="nav-item" data-nav="learn"><span class="nav-ico">🎓</span><span class="nav-txt">互动学习</span></button>
+      <button class="nav-item" data-nav="progress"><span class="nav-ico">📊</span><span class="nav-txt">进度追踪</span></button>
+      <button class="nav-item" data-nav="path"><span class="nav-ico">🧭</span><span class="nav-txt">学习路径</span></button>
+      <button class="nav-item" data-nav="community"><span class="nav-ico">💬</span><span class="nav-txt">学习社区</span></button>
+      <button class="nav-item" data-nav="profile"><span class="nav-ico">👤</span><span class="nav-txt">我的</span></button>
+      <button class="nav-item logout" id="logout-btn"><span class="nav-ico">🚪</span><span class="nav-txt">退出登录</span></button>
+    </nav>
+    <div class="sidenav-overlay" id="sidenav-overlay"></div>
+
+    <!-- 主内容区 -->
+    <main class="main" id="main-view">
+      <!-- 视图动态渲染 -->
+    </main>
+
+    <!-- 底部移动导航 -->
+    <nav class="bottomnav">
+      <button class="bn-item active" data-nav="home"><span class="bn-ico">🏠</span><span class="bn-txt">学习</span></button>
+      <button class="bn-item" data-nav="courses"><span class="bn-ico">📚</span><span class="bn-txt">课程</span></button>
+      <button class="bn-item" data-nav="learn"><span class="bn-ico">🎓</span><span class="bn-txt">练习</span></button>
+      <button class="bn-item" data-nav="progress"><span class="bn-ico">📊</span><span class="bn-txt">进度</span></button>
+      <button class="bn-item" data-nav="community"><span class="bn-ico">💬</span><span class="bn-txt">社区</span></button>
+    </nav>
+  </div>
+
+  <!-- ============ 全局浮层 ============ -->
+  <div id="toast-container" class="toast-container"></div>
+  <div id="modal-root" class="modal-root"></div>
+  <div id="confetti-root" class="confetti-root"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
