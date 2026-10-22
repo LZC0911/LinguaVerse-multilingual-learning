@@ -2,6 +2,8 @@
 
 > 版本：v1.0.0　|　文档类型：架构设计 / 核心算法 / 部署指南
 > 项目定位：支持英语、日语、韩语的在线教育平台，提供分级课程、互动学习、进度追踪、个性化路径与社区激励。
+
+
 直接测试demo：https://lzc0911.github.io/LinguaVerse-multilingual-learning/
 ---
 
